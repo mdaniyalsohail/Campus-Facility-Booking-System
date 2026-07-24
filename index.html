@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Facility Booking System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav id="mainNav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="brand-icon">🎓</span>
+                <span class="brand-text">Campus Hub</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#" data-page="dashboard" class="nav-link">
+                    <span class="nav-icon">📊</span>
+                    <span>Dashboard</span>
+                </a></li>
+                <li><a href="#" data-page="library" class="nav-link">
+                    <span class="nav-icon">📚</span>
+                    <span>Library</span>
+                </a></li>
+                <li><a href="#" data-page="court" class="nav-link">
+                    <span class="nav-icon">🏀</span>
+                    <span>Courts</span>
+                </a></li>
+                <li><a href="#" data-page="cafeteria" class="nav-link">
+                    <span class="nav-icon">🍽️</span>
+                    <span>Cafeteria</span>
+                </a></li>
+                <li><a href="#" data-page="career" class="nav-link">
+                    <span class="nav-icon">💼</span>
+                    <span>Career</span>
+                </a></li>
+                 <li><a href="#" data-page="mybookings" class="nav-link">
+                    <span class="nav-icon">📝</span>
+                    <span>My Bookings</span>
+                </a></li>
+            </ul>
+            <button class="logout-btn" id="logoutBtn">
+                <span>Logout</span>
+                <span class="logout-icon">→</span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="page active" id="loginPage">
+        <div class="login-background">
+            <div class="login-container">
+                <div class="login-card">
+                    <div class="login-header">
+                        <div class="login-icon">🎓</div>
+                        <h1>Welcome Back</h1>
+                        <p>Login to access campus facilities</p>
+                    </div>
+                    <div class="error-message" id="loginError"></div>
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label for="enrollment">
+                                <span class="label-icon">👤</span>
+                                Enrollment Number
+                            </label>
+                            <input type="text" id="enrollment" placeholder="Enter your enrollment number" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">
+                                <span class="label-icon">🔒</span>
+                                Password
+                            </label>
+                            <input type="password" id="password" placeholder="Enter your password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-large">
+                            <span>Sign In</span>
+                            <span class="btn-arrow">→</span>
+                        </button>
+                    </form>
+                    <div class="login-footer">
+                        <p class="demo-info">
+                            <span class="info-icon">ℹ️</span>
+                            Demo: <strong>2024001</strong> / <strong>password</strong>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page" id="dashboardPage">
+        <div class="page-content">
+            <div class="dashboard-header">
+                <h1 class="page-title">Campus Dashboard</h1>
+                <p class="page-subtitle">Select a facility to book</p>
+            </div>
+            <div class="modules-grid">
+                <div class="module-card library-card" data-module="library">
+                    <div class="module-icon">📚</div>
+                    <h3>Library Booking</h3>
+                    <p>Reserve group study rooms</p>
+                    <div class="module-badge">Available Now</div>
+                </div>
+                <div class="module-card court-card" data-module="court">
+                    <div class="module-icon">🏀</div>
+                    <h3>Court Booking</h3>
+                    <p>Book basketball & badminton courts</p>
+                    <div class="module-badge">Open</div>
+                </div>
+                <div class="module-card cafeteria-card" data-module="cafeteria">
+                    <div class="module-icon">🍽️</div>
+                    <h3>Cafeteria</h3>
+                    <p>Pre-order meals for quick pickup</p>
+                    <div class="module-badge">Serving</div>
+                </div>
+                <div class="module-card career-card" data-module="career">
+                    <div class="module-icon">💼</div>
+                    <h3>Career Counseling</h3>
+                    <p>Schedule career guidance sessions</p>
+                    <div class="module-badge">Book Now</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page" id="libraryPage">
+        <div class="page-content">
+            <div class="section-header">
+                <h1 class="page-title">📚 Library Room Booking</h1>
+                <p class="page-subtitle">Group Study Rooms (4-6 seats)</p>
+            </div>
+            
+            <div class="booking-container">
+                 <div class="form-group date-selector-group">
+                    <label for="libraryDate">
+                        <span class="label-icon">📅</span>
+                        Select Date
+                    </label>
+                    <input type="date" id="libraryDate" required>
+                </div>
+
+                <div class="slots-section">
+                    <h3 class="section-title">Available Time Slots</h3>
+                    <div id="librarySlots" class="slots-grid">
+                        <p class="empty-state">Select a date to view slots.</p>
+                    </div>
+                </div>
+
+                <div class="confirmation-card" id="libraryConfirmation">
+                    <div class="confirmation-header">
+                        <span class="confirmation-icon">✅</span>
+                        <h3>Booking Confirmed!</h3>
+                    </div>
+                    <div class="confirmation-details" id="libraryDetails"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page" id="courtPage">
+        <div class="page-content">
+            <div class="section-header">
+                <h1 class="page-title">🏀 Court Booking</h1>
+                <p class="page-subtitle">Student hours: 6-10 AM & 5-9 PM</p>
+            </div>
+            
+            <div class="booking-container">
+                <div class="form-group date-selector-group">
+                    <label for="courtDate">
+                        <span class="label-icon">📅</span>
+                        Select Date
+                    </label>
+                    <input type="date" id="courtDate" required>
+                </div>
+                
+                <div class="sport-selector">
+                    <button class="sport-btn" data-sport="basketball">
+                        <span class="sport-icon">🏀</span>
+                        <span>Basketball</span>
+                    </button>
+                    <button class="sport-btn" data-sport="badminton">
+                        <span class="sport-icon">🏸</span>
+                        <span>Badminton</span>
+                    </button>
+                </div>
+
+                <div class="slots-section">
+                    <h3 class="section-title" id="courtSlotsTitle">Available Time Slots</h3>
+                    <div id="courtSlots" class="slots-grid">
+                        <p class="empty-state">Select a date and sport to view slots.</p>
+                    </div>
+                </div>
+
+                <div class="confirmation-card" id="courtConfirmation">
+                    <div class="confirmation-header">
+                        <span class="confirmation-icon">✅</span>
+                        <h3>Court Booked!</h3>
+                    </div>
+                    <div class="confirmation-details" id="courtDetails"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page" id="cafeteriaPage">
+        <div class="page-content">
+            <div class="section-header">
+                <h1 class="page-title">🍽️ Cafeteria Pre-Order</h1>
+                <p class="page-subtitle">Select items for quick pickup</p>
+            </div>
+
+            <div class="cafeteria-layout">
+                <div class="menu-section">
+                    <div class="cafeteria-menu">
+                        <h3 class="menu-title">
+                            <span class="menu-icon">🍔</span>
+                            Main Cafeteria
+                        </h3>
+                        <div class="menu-grid" id="mainCafMenu"></div>
+                    </div>
+
+                    <div class="cafeteria-menu">
+                        <h3 class="menu-title">
+                            <span class="menu-icon">🍜</span>
+                            Food Court
+                        </h3>
+                        <div class="menu-grid" id="foodCourtMenu"></div>
+                    </div>
+
+                    <button class="btn btn-primary btn-large" id="orderBtn">
+                        <span>Place Order</span>
+                        <span class="btn-arrow">→</span>
+                    </button>
+                </div>
+
+                <div class="sidebar-section">
+                    <div class="order-summary-card" id="orderSummary">
+                        <h3>Current Order</h3>
+                        <div id="selectedItems">
+                            <p class="empty-state">No items selected</p>
+                        </div>
+                        <div class="order-total" id="orderTotal"></div>
+                    </div>
+
+                    <div class="order-history-card" id="orderHistory">
+                        <h3>Order History</h3>
+                        <div id="historyList">
+                            <p class="empty-state">No previous orders</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="confirmation-card" id="cafeteriaConfirmation">
+                <div class="confirmation-header">
+                    <span class="confirmation-icon">✅</span>
+                    <h3>Order Confirmed!</h3>
+                </div>
+                <div class="confirmation-details" id="cafeteriaDetails"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page" id="careerPage">
+        <div class="page-content">
+            <div class="section-header">
+                <h1 class="page-title">💼 Career Counseling</h1>
+                <p class="page-subtitle">Book an appointment with our expert counselors</p>
+            </div>
+
+            <div class="career-container">
+                <form id="careerForm" class="career-form">
+                    <div class="form-group">
+                        <label for="counselor">
+                            <span class="label-icon">👨‍🏫</span>
+                            Select Counselor
+                        </label>
+                        <select id="counselor" required>
+                            <option value="">Choose a counselor</option>
+                            <option value="Dr. Sarah Johnson">Dr. Sarah Johnson - Career Guidance</option>
+                            <option value="Mr. Michael Chen">Mr. Michael Chen - Technical Careers</option>
+                            <option value="Ms. Emily Davis">Ms. Emily Davis - Entrepreneurship</option>
+                            <option value="Dr. Robert Williams">Dr. Robert Williams - Graduate Studies</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="consultDate">
+                                <span class="label-icon">📅</span>
+                                Select Date
+                            </label>
+                            <input type="date" id="consultDate" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="consultTime">
+                                <span class="label-icon">🕐</span>
+                                Select Time
+                            </label>
+                            <select id="consultTime" required>
+                                <option value="">Choose a time</option>
+                                <option value="09:00 AM">09:00 AM</option>
+                                <option value="10:00 AM">10:00 AM</option>
+                                <option value="11:00 AM">11:00 AM</option>
+                                <option value="02:00 PM">02:00 PM</option>
+                                <option value="03:00 PM">03:00 PM</option>
+                                <option value="04:00 PM">04:00 PM</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="consultReason">
+                            <span class="label-icon">📝</span>
+                            Reason for Consultation
+                        </label>
+                        <textarea id="consultReason" rows="4" placeholder="Brief description of what you'd like to discuss..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-large">
+                        <span>Book Appointment</span>
+                        <span class="btn-arrow">→</span>
+                    </button>
+                </form>
+
+                <div class="confirmation-card" id="careerConfirmation">
+                    <div class="confirmation-header">
+                        <span class="confirmation-icon">✅</span>
+                        <h3>Appointment Confirmed!</h3>
+                    </div>
+                    <div class="confirmation-details" id="careerDetails"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="page" id="mybookingsPage">
+        <div class="page-content">
+            <div class="section-header">
+                <h1 class="page-title">📝 My Bookings & Appointments</h1>
+                <p class="page-subtitle">Manage your facility bookings and career appointments</p>
+            </div>
+            
+            <div class="booking-list-container" id="allBookingsList">
+                <p class="empty-state">You have no active bookings.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer id="mainFooter">
+        <div class="footer-content">
+            <p>&copy; 2024 Campus Facility Booking System. All rights reserved.</p>
+            <p>Contact: support@campus.edu | Phone: +1-234-567-8900</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
